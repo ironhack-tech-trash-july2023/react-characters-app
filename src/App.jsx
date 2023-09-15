@@ -11,6 +11,11 @@ function App() {
   const [characters, setCharacters] = useState(null);
 
   useEffect(() => {
+    getCharactersFromApi();
+  }, []);
+
+
+  const getCharactersFromApi = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/characters`)
       .then(response => {
         setCharacters(response.data);
@@ -18,9 +23,7 @@ function App() {
       .catch((e) => {
         console.log("error getting characters from the API....", e);
       });
-  }, []);
-
-
+  }
 
   const renderList = () => {
     if (characters === null) {
@@ -52,7 +55,7 @@ function App() {
         <Route path='/' element={renderList()} />
         <Route path='/contact' element={<p>this will be the CONTACT PAGE</p>} />
         <Route path='/about' element={<p>this will be the ABOUT PAGE</p>} />    
-        <Route path='/characters/:characterId' element={<CharacterDetails />} />
+        <Route path='/characters/:characterId' element={<CharacterDetails callbackToUpdateCharacters={getCharactersFromApi} />} />
       </Routes>
       
     </>
