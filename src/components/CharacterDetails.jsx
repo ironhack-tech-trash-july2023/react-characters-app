@@ -9,7 +9,7 @@ function CharacterDetails() {
     const [characterDetails, setCharacterDetails] = useState({});
 
     useEffect(() => {
-        axios.get("https://ih-crud-api.herokuapp.com/characters/" + characterId)
+        axios.get(`${import.meta.env.VITE_API_URL}/characters/${characterId}`)
             .then( response => {
                 setCharacterDetails(response.data)
             })

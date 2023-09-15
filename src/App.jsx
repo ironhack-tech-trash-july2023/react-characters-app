@@ -11,7 +11,7 @@ function App() {
   const [characters, setCharacters] = useState(null);
 
   useEffect(() => {
-    axios.get("https://ih-crud-api.herokuapp.com/characters")
+    axios.get(`${import.meta.env.VITE_API_URL}/characters`)
       .then(response => {
         setCharacters(response.data);
       })
